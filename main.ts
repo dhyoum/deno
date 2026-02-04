@@ -22,11 +22,13 @@ bot.on("message:text", async (ctx) => {
   const userId = ctx.from.id;
   const text = ctx.message.text;
 
+  console.log(`[수신] ID: ${userId}, 내용: ${text}`);
+
   if (text.startsWith("이름:")) {
     const name = text.replace("이름:", "").trim();
 
     await kv.set(["users", userId, "name"], name);
-
+    console.log(`[저장] 사용자 ${userId}의 이름을 ${name}으로 저장함`);
     return ctx.reply(`기억했습니다! 이제 ${name}님이라고 불러드릴게요.`);
   }
 
